@@ -10,7 +10,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const tag = slug[0] === "All" ? undefined : (slug[0] as NoteTag);
+  const tag = slug[0] === "All" ? "All notes" : (slug[0] as NoteTag);
   return {
     title: `${tag}`,
     description: `${tag} notes`,
