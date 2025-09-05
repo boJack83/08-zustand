@@ -18,14 +18,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Note Hub",
   description: "Application for creating and searching notes",
-
       openGraph: {
-      title: `Note Hub`,
+      title: "Note Hub",
       description: "Application for creating and searching notes",
-      url: `https://08-zustand-ten-mu.vercel.app/`,
+      url: "https://08-zustand-ten-mu.vercel.app/",
       images: [
         {
-          url: 'https://ac.goit.global/fullstack/react/og-meta.jpg',
+          url: "https://ac.goit.global/fullstack/react/og-meta.jpg",
           width: 1200,
           height: 630,
           alt: "Note Hub Foto",
