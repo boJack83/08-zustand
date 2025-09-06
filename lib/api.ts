@@ -27,7 +27,7 @@ export async function deleteNote(id: string): Promise<Note> {
   )
   return response.data;
 }
-
+// fetchNoteById : має виконувати запит для отримання однієї нотатків із сервера за її id
 export async function fetchNoteById(id: string): Promise<Note> {
   const response = await axios.get<Note>(`https://notehub-public.goit.study/api/notes/${id}`,
         {headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`},}
