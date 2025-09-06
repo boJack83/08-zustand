@@ -2,19 +2,19 @@ import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query
 import { fetchNotes } from "@/lib/api";
 import NotesClient from "./Notes.client";
 import { NoteTag } from "@/types/note";
+import { Metadata } from "next";
 
 
 type Props = {
     params: Promise<{ slug: string[] }>
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug[0] === "All" ? "All notes" : (slug[0] as NoteTag);
   return {
     title: `${tag}`,
     description: `${tag} notes`,
-    url: `https://08-zustand-ten-mu.vercel.app/${tag}`,
     openGraph: {
       title: `${tag}`,
       description: `${tag} notes`,

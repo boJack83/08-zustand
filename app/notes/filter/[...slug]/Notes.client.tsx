@@ -20,16 +20,16 @@ type NotesClientProps = {
   tag?: NoteTag;
 };
 
-export default function NotesClient({tag}: NotesClientProps) {
+const perPage = 12;
 
-  const perPage = 12;
+export default function NotesClient({tag}: NotesClientProps) {
 
   const [search, setSearch] = useState(""); // стан для пошуку
   const [page, setPage] = useState(1); // стан для пагінації
   // const [isModalOpen, setIsModalOpen] = useState(false); // стан модального вікна
   const [debouncedSearch] = useDebounce(search, 1000); // стан затримки пошуку
 
-  const { data, isSuccess} = useQuery({ // стан запиту
+  const { data } = useQuery({ // стан запиту
     queryKey: ["notes", page, debouncedSearch, tag],
     queryFn: () => fetchNotes(page, debouncedSearch, perPage, tag),
     placeholderData: keepPreviousData, // без блимання
@@ -51,14 +51,13 @@ const handleSearchChange = (value: string) => {
     <>
     <div className={css.app}>
 	<header className={css.toolbar}>
-          {/* Компонент SearchBox */
-            <SearchBox value={search} onChange={handleSearchChange} />}
+
+          <SearchBox value={search} onChange={handleSearchChange} />
           
-          {/* Пагінація */
-            isSuccess && data?.totalPages > 1 && <Pagination totalPages={data.totalPages} currentPage={page} onPageChange={setPage} />}
+          {data && data?.totalPages > 1 && <Pagination totalPages={data.totalPages} currentPage={page} onPageChange={setPage} />}
           
-          {/* Кнопка створення нотатки */
-            <Link href="/notes/action/create" className={css.button} role="button">Create note +</Link>}
+          <Link href="/notes/action/create" className={css.button} role="button">Create note +</Link>
+          
   </header> 
 
         {data && data?.notes.length > 0 && <NoteList notes={data.notes} />}
